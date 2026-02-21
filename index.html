@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Aladdin Finance - Premium Financial Intelligence Platform">
+<title>Aladdin Finance | Premium Financial Intelligence</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Premium Dark Palette */
+  --bg-dark: #0a0e27;
+  --bg-darker: #050710;
+  --surface-dark: #151a3a;
+  --surface-medium: #1f2547;
+  --surface-light: #2a3155;
+  
+  /* Accent Colors */
+  --accent-gold: #d4af37;
+  --accent-cyan: #00d9ff;
+  --accent-blue: #0066ff;
+  --accent-purple: #8b5cf6;
+  
+  /* Text Colors */
+  --text-primary: #f8f9fc;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+  
+  /* Functional */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  
+  /* Effects */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.3);
+  --shadow-lg: 0 24px 64px rgba(0,0,0,0.4);
+  --shadow-xl: 0 32px 96px rgba(0,0,0,0.5);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Premium Gradient Overlays */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(0, 217, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--accent-gold);
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* HEADER & NAVIGATION */
+/* ════════════════════════════════════════════════════════════ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: rgba(10, 14, 39, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  transition: var(--transition);
+}
+
+.header.scrolled {
+  background: rgba(10, 14, 39, 0.98);
+  box-shadow: var(--shadow-md);
+}
+
+.header-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+}
+
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex: 1;
+}
+
+.nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  position: relative;
+  transition: var(--transition);
+}
+
+.nav-link:hover {
+  color: var(--accent-cyan);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-cyan));
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.btn-nav {
+  margin-left: auto;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
+  color: var(--bg-dark);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
+}
+
+.btn-nav:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(212, 175, 55, 0.3);
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* HERO SECTION */
+/* ════════════════════════════════════════════════════════════ */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 40px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(0, 217, 255, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 20s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50% { transform: translateY(30px) translateX(30px); }
+}
+
+.hero-content {
+  max-width: 900px;
+  text-align: center;
+  z-index: 1;
+}
+
+.hero-tag {
+  display: inline-block;
+  padding: 8px 16px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: var(--radius-xl);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-gold);
+  margin-bottom: 32px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-cyan) 50%, var(--accent-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
+  animation: slideInDown 0.8s ease 0.1s both;
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  color: var(--text-secondary);
+  margin-bottom: 48px;
+  line-height: 1.6;
+  animation: slideInUp 0.8s ease 0.2s both;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: slideInUp 0.8s ease 0.3s both;
+}
+
+.btn-primary {
+  padding: 16px 40px;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
+  color: var(--bg-dark);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 12px 36px rgba(212, 175, 55, 0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(212, 175, 55, 0.35);
+}
+
+.btn-secondary {
+  padding: 16px 40px;
+  background: transparent;
+  color: var(--accent-cyan);
+  border: 2px solid var(--accent-cyan);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 217, 255, 0.1);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* FEATURES SECTION */
+/* ════════════════════════════════════════════════════════════ */
+
+.section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 120px 40px;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.section-description {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin-bottom: 64px;
+  line-height: 1.7;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 64px;
+}
+
+.feature-card {
+  background: rgba(42, 49, 85, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feature-card:hover {
+  background: rgba(42, 49, 85, 0.6);
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(212, 175, 55, 0.15);
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-icon {
+  font-size: 48px;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.feature-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.feature-text {
+  font-size: 16px;
+  color: var(--text-tertiary);
+  line-height: 1.7;
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* HIGHLIGHT SECTION */
+/* ════════════════════════════════════════════════════════════ */
+
+.highlight-section {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(0, 217, 255, 0.08) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: var(--radius-xl);
+  padding: 80px 60px;
+  text-align: center;
+  margin: 120px 0;
+}
+
+.highlight-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.highlight-text {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto 40px;
+  line-height: 1.8;
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* STATS SECTION */
+/* ════════════════════════════════════════════════════════════ */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  margin-top: 64px;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 40px;
+  border-bottom: 2px solid rgba(212, 175, 55, 0.2);
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  border-bottom-color: var(--accent-gold);
+  transform: translateY(-4px);
+}
+
+.stat-number {
+  font-family: 'Syne', sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+}
+
+.stat-label {
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* PRICING CARDS */
+/* ════════════════════════════════════════════════════════════ */
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 64px;
+}
+
+.pricing-card {
+  background: rgba(42, 49, 85, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: var(--radius-xl);
+  padding: 48px 32px;
+  transition: var(--transition);
+  position: relative;
+}
+
+.pricing-card.featured {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(0, 217, 255, 0.15));
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+}
+
+.pricing-tag {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--accent-gold);
+  color: var(--bg-dark);
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pricing-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.pricing-description {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.pricing-price {
+  font-family: 'Syne', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-bottom: 32px;
+}
+
+.pricing-price small {
+  font-size: 18px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+.pricing-features {
+  list-style: none;
+  margin-bottom: 40px;
+}
+
+.pricing-features li {
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  font-size: 15px;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pricing-features li::before {
+  content: '✓';
+  color: var(--accent-cyan);
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.btn-pricing {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  color: var(--accent-cyan);
+  border: 1.5px solid var(--accent-cyan);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pricing-card.featured .btn-pricing {
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
+  color: var(--bg-dark);
+  border: none;
+}
+
+.btn-pricing:hover {
+  background: rgba(0, 217, 255, 0.1);
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.pricing-card.featured .btn-pricing:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(212, 175, 55, 0.25);
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* CALCULATOR SECTION */
+/* ════════════════════════════════════════════════════════════ */
+
+.calculator-section {
+  background: rgba(21, 26, 58, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  border-radius: var(--radius-xl);
+  padding: 80px 60px;
+  margin: 120px 0;
+  position: relative;
+  overflow: hidden;
+  scroll-margin-top: 100px;
+}
+
+.calculator-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.calculator-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.calculator-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.calculator-description {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.calculator-embed {
+  position: relative;
+  z-index: 1;
+  background: rgba(10, 14, 39, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  overflow: hidden;
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* TESTIMONIALS */
+/* ════════════════════════════════════════════════════════════ */
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 32px;
+  margin-top: 64px;
+}
+
+.testimonial-card {
+  background: rgba(42, 49, 85, 0.4);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  transition: var(--transition);
+}
+
+.testimonial-card:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+  background: rgba(42, 49, 85, 0.6);
+  box-shadow: 0 12px 36px rgba(212, 175, 55, 0.1);
+}
+
+.testimonial-text {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 32px;
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.author-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-cyan));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--bg-dark);
+  font-size: 20px;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.author-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 15px;
+}
+
+.author-role {
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* CTA SECTION */
+/* ════════════════════════════════════════════════════════════ */
+
+.cta-section {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(0, 217, 255, 0.1));
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: var(--radius-xl);
+  padding: 100px 60px;
+  text-align: center;
+  margin: 120px 0;
+}
+
+.cta-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+.cta-description {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* FOOTER */
+/* ════════════════════════════════════════════════════════════ */
+
+.footer {
+  background: rgba(5, 7, 16, 0.8);
+  border-top: 1px solid rgba(212, 175, 55, 0.1);
+  padding: 80px 40px 40px;
+  margin-top: 120px;
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.footer-section h4 {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links a {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  transition: var(--transition);
+}
+
+.footer-links a:hover {
+  color: var(--accent-gold);
+}
+
+.footer-divider {
+  border-top: 1px solid rgba(212, 175, 55, 0.1);
+  padding-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-copyright {
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.footer-socials {
+  display: flex;
+  gap: 20px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-gold);
+  transition: var(--transition);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.social-icon:hover {
+  background: rgba(212, 175, 55, 0.2);
+  transform: translateY(-4px);
+}
+
+/* ════════════════════════════════════════════════════════════ */
+/* RESPONSIVE */
+/* ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .header-content {
+    gap: 30px;
+    padding: 20px 30px;
+  }
+  
+  nav {
+    gap: 20px;
+  }
+  
+  .hero-title {
+    font-size: 48px;
+  }
+  
+  .section-title {
+    font-size: 36px;
+  }
+  
+  .section {
+    padding: 80px 30px;
+  }
+  
+  .pricing-card.featured {
+    transform: scale(1.02);
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    gap: 20px;
+    padding: 16px 20px;
+  }
+  
+  .nav-link {
+    display: none;
+  }
+  
+  .btn-nav {
+    margin-left: 0;
+  }
+  
+  .hero {
+    min-height: 80vh;
+    padding: 80px 20px 60px;
+  }
+  
+  .hero-title {
+    font-size: 32px;
+  }
+  
+  .hero-subtitle {
+    font-size: 16px;
+  }
+  
+  .section {
+    padding: 60px 20px;
+  }
+  
+  .section-title {
+    font-size: 28px;
+  }
+  
+  .section-description {
+    font-size: 16px;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .feature-card {
+    padding: 30px;
+  }
+  
+  .highlight-section {
+    padding: 50px 30px;
+    margin: 80px 0;
+  }
+  
+  .highlight-title {
+    font-size: 32px;
+  }
+  
+  .highlight-text {
+    font-size: 16px;
+  }
+  
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .pricing-card.featured {
+    transform: scale(1);
+  }
+  
+  .calculator-section {
+    padding: 50px 30px;
+    margin: 80px 0;
+  }
+  
+  .calculator-title {
+    font-size: 32px;
+  }
+  
+  .cta-section {
+    padding: 60px 30px;
+    margin: 80px 0;
+  }
+  
+  .cta-title {
+    font-size: 32px;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .footer-divider {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- HEADER -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<header class="header" id="header">
+  <div class="header-content">
+    <div class="logo">✨ Aladdin</div>
+    <nav>
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#resources" class="nav-link">Resources</a>
+      <a href="#calculator" class="nav-link">Calculator</a>
+    </nav>
+    <button class="btn-nav" onclick="scrollTo('#calculator'); return false;">Start Analyzing</button>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- HERO SECTION -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-tag">✨ Premium Financial Intelligence</div>
+    <h1 class="hero-title">Master Your Financial Decisions</h1>
+    <p class="hero-subtitle">Industry-grade tools for lease vs rent analysis, investment modeling, and strategic financial planning. Trusted by professionals worldwide.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="scrollTo('#calculator'); return false;">Explore Calculator</button>
+      <button class="btn-secondary" onclick="alert('Demo coming soon')">Watch Demo</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- FEATURES -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<section class="section" id="features">
+  <div class="section-label">Capabilities</div>
+  <h2 class="section-title">Enterprise-Grade Analysis Tools</h2>
+  <p class="section-description">Built with institutional standards in mind. Our tools deliver precision, clarity, and actionable insights for complex financial decisions.</p>
+  
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">📊</span>
+      <h3 class="feature-title">Advanced Modeling</h3>
+      <p class="feature-text">Sophisticated algorithms account for interest, opportunity costs, inflation, and risk premiums with institutional precision.</p>
+    </div>
+    
+    <div class="feature-card">
+      <span class="feature-icon">⚡</span>
+      <h3 class="feature-title">Real-Time Analysis</h3>
+      <p class="feature-text">Instant calculations as you adjust parameters. See impact of every decision immediately with dynamic visualizations.</p>
+    </div>
+    
+    <div class="feature-card">
+      <span class="feature-icon">🔐</span>
+      <h3 class="feature-title">Premium Security</h3>
+      <p class="feature-text">Your financial data stays private. All calculations run locally in your browser—zero server uploads or tracking.</p>
+    </div>
+    
+    <div class="feature-card">
+      <span class="feature-icon">📈</span>
+      <h3 class="feature-title">Visual Insights</h3>
+      <p class="feature-text">Professional-grade charts and dashboards. Understand cost drivers, trends, and decision strength at a glance.</p>
+    </div>
+    
+    <div class="feature-card">
+      <span class="feature-icon">🎯</span>
+      <h3 class="feature-title">Decision Intelligence</h3>
+      <p class="feature-text">Confidence scores and sensitivity analysis. Know how robust your decision is against market uncertainties.</p>
+    </div>
+    
+    <div class="feature-card">
+      <span class="feature-icon">🌐</span>
+      <h3 class="feature-title">Multi-Currency</h3>
+      <p class="feature-text">Support for global markets. Analyze in any currency with localized formatting and regional conventions.</p>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div style="margin-top: 100px;">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">50K+</div>
+        <div class="stat-label">Analyses Completed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">$2.3B</div>
+        <div class="stat-label">Decisions Informed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">User Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- HIGHLIGHT -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<section class="section">
+  <div class="highlight-section">
+    <h3 class="highlight-title">For Finance Professionals & Individuals</h3>
+    <p class="highlight-text">Whether you're a CFO evaluating corporate leases, a financial advisor guiding clients, or an individual making personal asset decisions, our tools deliver institutional-grade insights.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PRICING -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<section class="section" id="pricing">
+  <div class="section-label">Transparent Pricing</div>
+  <h2 class="section-title">Plans for Every Need</h2>
+  <p class="section-description">Access to core tools is always free. Scale to unlimited analyses with premium features.</p>
+  
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-name">Essential</div>
+      <p class="pricing-description">Perfect for getting started</p>
+      <div class="pricing-price">Free<small>/forever</small></div>
+      <ul class="pricing-features">
+        <li>Lease vs Rent Calculator</li>
+        <li>Real-time visualizations</li>
+        <li>Up to 5 saved analyses</li>
+        <li>Export to PDF</li>
+      </ul>
+      <button class="btn-pricing">Get Started</button>
+    </div>
+    
+    <div class="pricing-card featured">
+      <div class="pricing-tag">Most Popular</div>
+      <div class="pricing-name">Professional</div>
+      <p class="pricing-description">For active analysts</p>
+      <div class="pricing-price">$19<small>/month</small></div>
+      <ul class="pricing-features">
+        <li>All Essential features</li>
+        <li>Unlimited analyses</li>
+        <li>Advanced sensitivity analysis</li>
+        <li>API access</li>
+        <li>Priority support</li>
+      </ul>
+      <button class="btn-pricing">Start Free Trial</button>
+    </div>
+    
+    <div class="pricing-card">
+      <div class="pricing-name">Enterprise</div>
+      <p class="pricing-description">Custom solutions</p>
+      <div class="pricing-price">Custom<small>/annually</small></div>
+      <ul class="pricing-features">
+        <li>All Professional features</li>
+        <li>Custom integrations</li>
+        <li>Dedicated account manager</li>
+        <li>White-label options</li>
+        <li>SLA guarantee</li>
+      </ul>
+      <button class="btn-pricing">Contact Sales</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- CALCULATOR EMBED -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<section class="section" id="calculator">
+  <div class="calculator-section">
+    <div class="calculator-header">
+      <h2 class="calculator-title">Lease vs Rent Analyzer</h2>
+      <p class="calculator-description">Comprehensive financial modeling with institutional-grade precision. Enter your parameters and explore scenarios in real-time.</p>
+    </div>
+    
+    <div class="calculator-embed">
+      <iframe 
+        src="analyzer.html" 
+        style="width: 100%; height: 3000px; border: none; border-radius: 12px; overflow: hidden;" 
+        title="Lease vs Rent Financial Analyzer">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- TESTIMONIALS -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<section class="section" id="resources">
+  <div class="section-label">Social Proof</div>
+  <h2 class="section-title">Trusted by Industry Leaders</h2>
+  <p class="section-description">Financial professionals worldwide rely on our platform for critical decisions.</p>
+  
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <p class="testimonial-text">"Aladdin's analyzer saved us months of manual calculations. The sensitivity analysis gave us confidence in our lease decision."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">RJ</div>
+        <div class="author-info">
+          <div class="author-name">Rajesh Joshi</div>
+          <div class="author-role">CFO, Tech Corp Asia</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="testimonial-card">
+      <p class="testimonial-text">"The institutional-grade insights coupled with ease of use makes this a no-brainer for financial advisors. My clients trust the analysis completely."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SP</div>
+        <div class="author-info">
+          <div class="author-name">Sophia Park</div>
+          <div class="author-role">Financial Advisor, Wealth Advisors LLP</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="testimonial-card">
+      <p class="testimonial-text">"As someone making a major personal asset decision, the clarity and visual insights were invaluable. Highly recommend."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MK</div>
+        <div class="author-info">
+          <div class="author-name">Michael Kim</div>
+          <div class="author-role">Real Estate Investor</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- CTA -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<section class="section">
+  <div class="cta-section">
+    <h2 class="cta-title">Ready to Transform Your Financial Analysis?</h2>
+    <p class="cta-description">Join thousands of finance professionals who use Aladdin to make better, faster decisions. Get started free—no credit card required.</p>
+    <button class="btn-primary" onclick="scrollTo('#calculator'); return false;" style="margin: 0 auto; display: block;">Launch Calculator</button>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>Product</h4>
+      <div class="footer-links">
+        <a href="#calculator">Calculator</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#">Features</a>
+        <a href="#">Security</a>
+      </div>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Company</h4>
+      <div class="footer-links">
+        <a href="#">About Us</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Resources</h4>
+      <div class="footer-links">
+        <a href="#">Documentation</a>
+        <a href="#">API Docs</a>
+        <a href="#">Guides</a>
+        <a href="#">Community</a>
+      </div>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Legal</h4>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookies</a>
+        <a href="#">Disclaimer</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer-divider">
+    <p class="footer-copyright">© 2024 Aladdin Finance. All rights reserved.</p>
+    <div class="footer-socials">
+      <div class="social-icon" title="LinkedIn">in</div>
+      <div class="social-icon" title="Twitter">𝕏</div>
+      <div class="social-icon" title="Github">◆</div>
+      <div class="social-icon" title="Email">✉</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ════════════════════════════════════════════════════════════
+// HEADER SCROLL EFFECT
+// ════════════════════════════════════════════════════════════
+
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('header');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+
+// ════════════════════════════════════════════════════════════
+// SMOOTH SCROLL WITH PROPER OFFSET
+// ════════════════════════════════════════════════════════════
+
+function scrollTo(selector) {
+  const element = document.querySelector(selector);
+  if (element) {
+    // Account for fixed header height (80px)
+    const headerOffset = 80;
+    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = elementPosition - headerOffset;
+    
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  }
+}
+
+// Handle internal anchor links smoothly
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href^="#"]');
+  if (link) {
+    const href = link.getAttribute('href');
+    if (href !== '#' && document.querySelector(href)) {
+      e.preventDefault();
+      scrollTo(href);
+    }
+  }
+});
+
+// ════════════════════════════════════════════════════════════
+// INTERSECTION OBSERVER FOR ANIMATIONS
+// ════════════════════════════════════════════════════════════
+
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+// Observe feature cards, pricing cards, testimonials
+document.querySelectorAll('.feature-card, .pricing-card, .testimonial-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'all 0.6s ease';
+  observer.observe(el);
+});
+</script>
+
+</body>
+</html>
