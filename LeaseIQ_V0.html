@@ -1453,91 +1453,6 @@
             .summary-panel { grid-template-columns: repeat(2, 1fr); }
         }
 
-        /* =====================================================
-           LIGHT MODE — CONTRAST & VISIBILITY FIXES
-           All dark-mode-tuned colors replaced with WCAG AA
-           compliant equivalents for white/light backgrounds.
-           Zero changes to dark mode.
-        ===================================================== */
-
-        /* 1. Override semantic color variables to light-safe versions.
-              Dark mode uses vivid/neon values that fail on white. */
-        body.light {
-            --green:  #16a34a;   /* was #2ecc71 — darkened for contrast on white */
-            --amber:  #b45309;   /* was #f1c40f — bright yellow → readable brown-amber */
-            --red:    #dc2626;   /* was #ff4d4d — slightly deeper red */
-            --purple: #6d28d9;   /* was #9b59b6 */
-            --cyan:   #0369a1;   /* was #00d4ff */
-            --orange: #c2410c;   /* was #ff8c3a */
-        }
-
-        /* 2. Track/bar backgrounds that are rgba(255,255,255,0.07) — invisible on white. */
-        body.light .confidence-bar-outer { background: #e2e8f0; }
-        body.light .qual-score-track     { background: #e2e8f0; }
-        body.light .kbd-hint             { background: #f1f5f9; border-color: #cbd5e1; }
-
-        /* 3. Panel backgrounds: replace near-transparent blue tints with solid light grays. */
-        body.light .metric-card          { background: #f1f5f9; border-color: #cbd5e1; }
-        body.light .metric-card:hover    { background: #e2e8f0; border-color: var(--accent); }
-        body.light .summary-panel        { background: #f8fafc; border-color: #e2e8f0; }
-        body.light .summary-item:hover   { background: #e2e8f0; }
-        body.light .sensitivity-controls { background: #f8fafc; border-color: #e2e8f0; }
-        body.light .confidence-explainer { background: #eff6ff; border-left-color: var(--accent); }
-        body.light .qual-verdict         { background: #eff6ff; border-left-color: var(--accent); }
-        body.light .breakeven-item       { background: #f8fafc; }
-        body.light .breakeven-item:hover { background: #e2e8f0; border-color: var(--accent); }
-        body.light .exit-stat            { background: #f8fafc; }
-        body.light .modal-example        { background: #eff6ff; }
-        body.light .info-banner          { background: #eff6ff; }
-        body.light .presets-bar          { background: #f8fafc; border-color: #e2e8f0; }
-        body.light .preset-btn:hover     { background: #e2e8f0; }
-
-        /* 4. Table rows. */
-        body.light .comparison-table th       { background: #f1f5f9; color: var(--accent); }
-        body.light .comparison-table tr:hover { background: #f8fafc; }
-
-        /* 5. Info button — blue tint invisible on white. */
-        body.light .info-btn       { background: rgba(30,64,175,0.08); border-color: rgba(30,64,175,0.25); color: var(--accent); }
-        body.light .info-btn:hover { background: rgba(30,64,175,0.15); border-color: var(--accent); }
-
-        /* 6. Verdict stat neutral uses amber which was bright yellow. */
-        body.light .verdict-stat-value.positive { color: #16a34a; }
-        body.light .verdict-stat-value.neutral  { color: #b45309; }
-
-        /* 7. Liquidity risk banner — text was neon on near-white, unreadable. */
-        body.light .verdict-liquidity.risk-low  { background: rgba(22,163,74,0.08);  border-left-color: #16a34a; color: #15803d; }
-        body.light .verdict-liquidity.risk-med  { background: rgba(180,83,9,0.08);   border-left-color: #b45309; color: #92400e; }
-        body.light .verdict-liquidity.risk-high { background: rgba(220,38,38,0.08);  border-left-color: #dc2626; color: #b91c1c; }
-
-        /* 8. Exit likelihood buttons — active states used neon green/yellow/red text. */
-        body.light .exit-btn                { border-color: #cbd5e1; color: #475569; }
-        body.light .exit-btn:hover          { border-color: var(--accent); color: var(--text); background: #f1f5f9; }
-        body.light .exit-btn.active-low     { background: rgba(22,163,74,0.1);  border-color: #16a34a; color: #15803d; }
-        body.light .exit-btn.active-med     { background: rgba(180,83,9,0.1);   border-color: #b45309; color: #92400e; }
-        body.light .exit-btn.active-high    { background: rgba(220,38,38,0.1);  border-color: #dc2626; color: #b91c1c; }
-
-        /* 9. Qualitative checklist checked state. */
-        body.light .qual-item:hover           { background: #f0fdf4; border-color: #86efac; }
-        body.light .qual-item.checked         { background: rgba(22,163,74,0.07); border-color: #16a34a; }
-        body.light .qual-item.checked .qual-checkbox { background: #16a34a; border-color: #16a34a; }
-
-        /* 10. Scenario grid cells — green/amber/red on near-white backgrounds. */
-        body.light .scenario-cell.wins        { background: rgba(22,163,74,0.08);  border-color: rgba(22,163,74,0.35); }
-        body.light .scenario-cell.loses       { background: rgba(220,38,38,0.08);  border-color: rgba(220,38,38,0.35); }
-        body.light .scenario-cell.neutral-cell{ background: rgba(180,83,9,0.07);   border-color: rgba(180,83,9,0.3);  }
-
-        /* 11. Payback metric card — amber tint was invisible. */
-        body.light .metric-card.payback-card       { background: rgba(180,83,9,0.06);  border-color: rgba(180,83,9,0.25); }
-        body.light .metric-card.payback-card:hover { background: rgba(180,83,9,0.12); border-color: #b45309; }
-
-        /* 12. Sensitivity chip active — dark text on blue, readable in both modes. */
-        body.light .sensitivity-chip        { border-color: #cbd5e1; color: var(--text); }
-        body.light .sensitivity-chip:hover  { background: #e2e8f0; border-color: var(--accent); }
-        body.light .sensitivity-chip.active { background: var(--accent); color: #ffffff; border-color: var(--accent); }
-
-        /* 13. Input error styling — red tint is fine but soften the glow on white. */
-        body.light input.input-error { box-shadow: 0 0 0 3px rgba(220,38,38,0.15) !important; }
-
     </style>
 </head>
 
@@ -1787,7 +1702,7 @@
                     </div></div>
 
                     <div class="field"><div class="field-wrapper">
-                        <div class="field-label-row"><label>Exit Likelihood</label><button class="info-btn" aria-label="Help for Flexibility Premium" onclick="showFieldHelp('flexibilityPremium')">ℹ</button></div>
+                        <div class="field-label-row"><label>Exit Likelihood <span class="label-value" id="flexibilityPremiumLabel">₹0/mo</span></label><button class="info-btn" aria-label="Help for Flexibility Premium" onclick="showFieldHelp('flexibilityPremium')">ℹ</button></div>
                         <div style="font-size:10px;color:var(--muted);margin-bottom:6px;">How likely are you to need to leave before the lease ends?</div>
                         <div class="exit-likelihood-group">
                             <button class="exit-btn active-low" id="exitBtnLow" onclick="setExitLikelihood('low')" aria-label="Unlikely to exit early">&#x1F7E2; Unlikely<br><span style="font-size:9px;opacity:0.8;">I'll stay full term</span></button>
@@ -1989,11 +1904,11 @@
                     <div id="rentStatCumulative" style="font-size:18px;font-weight:800;font-family:'Courier New',monospace;color:var(--text);">—</div>
                 </div>
                 <div style="background:rgba(155,89,182,0.1);border:1px solid rgba(155,89,182,0.25);border-radius:8px;padding:8px 14px;flex:1;min-width:120px;">
-                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--purple);margin-bottom:4px;">Monthly Saving at Lease End <span id="rentStatFinalMonth" style="font-weight:400;opacity:0.7;"></span></div>
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--purple);margin-bottom:4px;">Saving at Final Month</div>
                     <div id="rentStatFinal" style="font-size:18px;font-weight:800;font-family:'Courier New',monospace;color:var(--text);">—</div>
                 </div>
                 <div id="rentCrossoverPill" style="background:rgba(241,196,15,0.1);border:1px solid rgba(241,196,15,0.25);border-radius:8px;padding:8px 14px;flex:1;min-width:120px;display:none;">
-                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--amber);margin-bottom:4px;">Rent Exceeds Lease From</div>
+                    <div style="font-size:10px;font-weight:700;text-transform:uppercase;color:var(--amber);margin-bottom:4px;">Rent Overtakes Lease At</div>
                     <div id="rentStatCrossover" style="font-size:18px;font-weight:800;font-family:'Courier New',monospace;color:var(--text);">—</div>
                 </div>
             </div>
@@ -2227,24 +2142,7 @@
 <div class="share-toast" id="shareToast">✅ Link copied to clipboard!</div>
 
 <script>
-/* ── Guard: ChartDataLabels plugin registration ───────────────────────────
-   Chart.register() is called here at parse-time. If either CDN script
-   (chart.js or chartjs-plugin-datalabels) hasn't finished loading yet,
-   `Chart` is undefined and the ENTIRE script crashes silently — killing
-   all outputs. We defer registration to window.onload so both scripts
-   are guaranteed to be available. If they fail entirely, chart areas
-   degrade gracefully and text/table outputs still render.
-──────────────────────────────────────────────────────────────────────── */
-function _registerChartPlugins() {
-    if (typeof Chart !== 'undefined' && window['ChartDataLabels']) {
-        try { Chart.register(window['ChartDataLabels']); } catch(e) {}
-    }
-}
-if (document.readyState === 'complete') {
-    _registerChartPlugins();
-} else {
-    window.addEventListener('load', _registerChartPlugins);
-}
+Chart.register(window['ChartDataLabels']);
 
 /* ================= SHARE / LOAD FROM URL ================= */
 const SHARE_PARAMS = [
@@ -2441,14 +2339,14 @@ const fieldHelp = {
         ]
     },
     flexibilityPremium: {
-        title: 'Exit Likelihood',
-        subtitle: 'How likely are you to need to leave before the lease term ends? This adjusts the model for the hidden option value of renting\'s flexibility.',
+        title: 'Flexibility Value',
+        subtitle: 'The monthly ₹ value you place on renting\'s ability to exit without penalty — a lease cannot offer this.',
         sections: [
-            { title: 'Why it matters', text: 'A lease locks you in. Early exit typically means deposit forfeiture, contractual penalties, or both. Renting gives you the right to leave on short notice. The more likely you are to exit early, the more valuable that renting flexibility is — and the more the model adjusts rent\'s effective cost downward to reflect it.' },
-            { title: '🟢 Unlikely — I\'ll stay full term', text: 'You are confident you will see out the entire lease. You are settled in this city, your business is stable, and there is no foreseeable reason to exit early. This is the right choice for an established household, a business at a proven location, or anyone signing a short lease (12–18 months) where the risk is low anyway. No flexibility adjustment is applied.' },
-            { title: '🟡 Possible — Life could change', text: 'You intend to stay but can\'t rule out a move. Maybe you\'re a growing team that might need to resize, a professional who changes jobs occasionally, or a household that could relocate if the right opportunity came up. A moderate flexibility credit is applied — roughly 6% of monthly rent — to reflect that renting would have preserved an option you are giving up.' },
-            { title: '🔴 Likely — Business / relocation risk', text: 'Early exit is a real scenario you are actively weighing. Early-stage businesses in unproven locations, professionals in volatile industries, or anyone signing a long lease with genuine uncertainty about staying. A meaningful flexibility credit is applied — roughly 16% of monthly rent — because the option to leave without penalty is genuinely worth something to you, and a lease denies you that.' },
-            { title: 'How to choose', example: 'If this is your 3rd renewal at the same address → Unlikely | If your team grew 3× last year → Possible or Likely | If you\'re opening your first retail outlet in a new market → Likely | If you\'re a stable 20-person team in a 3-year office → Unlikely' }
+            { title: 'What it is', text: 'Renting gives you the right to leave with short notice and minimal penalty. A lease locks you in — early termination typically means deposit forfeiture or contractual penalties. This field quantifies that option value in monthly terms. The model subtracts it from rent\'s total cost, making renting appear cheaper on a risk-adjusted basis.' },
+            { title: 'Residential property', text: 'Location certainty matters here. Are you confident you will stay in this city for the full lease term? If you relocate frequently for work, change employers often, or have elderly parents in another city, exit optionality has real value — ₹3,000–₹8,000/month. If you are settled and confident, ₹0–₹2,000 is appropriate.' },
+            { title: 'Retail / shop space', text: 'A new business in an unproven location should value exit flexibility highly — ₹8,000–₹20,000/month. An established business with 5+ years at the same location and loyal foot traffic has very little reason to exit — use ₹0–₹3,000. The break-even clause or lock-in period in your lease also affects this.' },
+            { title: 'Office / workspace', text: 'Fast-growing startups that may need to double or halve headcount within 2 years should value flexibility at ₹5,000–₹15,000/month. A stable 50-person company with predictable headcount can use ₹1,000–₹3,000. Co-working is the ultimate flexible option — if you are comparing against co-working, flexibility value should be near zero for the renting side.' },
+            { title: 'Calibration guide', example: 'High certainty of staying (established business / settled household): ₹0–₹2,000 | Moderate uncertainty (growing team / mobile professional): ₹3,000–₹8,000 | High uncertainty (early-stage business / frequently relocated): ₹8,000–₹20,000' }
         ]
     },
     leaseTenure: {
@@ -2592,7 +2490,7 @@ const syncInputs = [
     { id: 'rentDeposit', label: 'rentDepositLabel', format: 'inr' },
     { id: 'depositRefundDelay', label: 'depositRefundDelayLabel', format: 'plain' },
     { id: 'rentIncrement', label: 'rentIncrementLabel', format: 'percent' },
-    // flexibilityPremium label removed — exit likelihood uses qualitative buttons, not a raw ₹ label
+    { id: 'flexibilityPremium', label: 'flexibilityPremiumLabel', format: 'inr' },
     { id: 'leaseTenure', label: 'leaseTenureLabel', format: 'plain' },
     { id: 'loanTenure', label: 'loanTenureLabel', format: 'plain' },
     { id: 'oppRate', label: 'oppRateLabel', format: 'percent' },
@@ -2672,7 +2570,7 @@ function initCharts(data) {
                     y: { ticks: { color: colors.muted }, grid: { display: false } }
                 }
             },
-            plugins: (typeof ChartDataLabels !== "undefined" ? [ChartDataLabels] : [])
+            plugins: [ChartDataLabels]
         });
     } else {
         tcoChart.data.labels = data.tco.labels;
@@ -2709,7 +2607,7 @@ function initCharts(data) {
                     x: { ticks: { color: colors.muted, maxRotation: 0 }, grid: { display: false } }
                 }
             },
-            plugins: (typeof ChartDataLabels !== "undefined" ? [ChartDataLabels] : [])
+            plugins: [ChartDataLabels]
         });
     } else {
         const aOut = data.monthly.emi + data.monthly.maintenance;
@@ -2765,20 +2663,9 @@ function initCharts(data) {
     if ($('rentStatMonthly')) $('rentStatMonthly').textContent = formatINR(monthlyM1Save);
     if ($('rentStatCumulative')) $('rentStatCumulative').textContent = formatINR(totalCumulSave);
     if ($('rentStatFinal')) $('rentStatFinal').textContent = formatINR(finalMonthSave);
-    // Show the month label on the "Final Month" stat so users know which month it refers to
-    if ($('rentStatFinalMonth')) {
-        const lastMonth = rp.months[rp.months.length - 1];
-        $('rentStatFinalMonth').textContent = lastMonth ? '(' + lastMonth + ')' : '';
-    }
     if ($('rentCrossoverPill') && $('rentStatCrossover')) {
-        // Only show crossover pill when rent actually starts below lease cost and later overtakes it.
-        // crossoverMonth === 1 means lease was already cheaper from day 1 — not a meaningful crossover.
-        if (rp.crossoverMonth && rp.crossoverMonth > 1) {
-            $('rentCrossoverPill').style.display = '';
-            $('rentStatCrossover').textContent = 'M' + rp.crossoverMonth;
-        } else {
-            $('rentCrossoverPill').style.display = 'none';
-        }
+        if (rp.crossoverMonth) { $('rentCrossoverPill').style.display = ''; $('rentStatCrossover').textContent = 'M' + rp.crossoverMonth; }
+        else { $('rentCrossoverPill').style.display = 'none'; }
     }
 
     if (!rentProjectionChart) {
@@ -3308,19 +3195,13 @@ function calculate() {
             amortInterest.push(interestPayment); amortBalance.push(remainingBalance);
         }
 
-        // Charts are isolated — if Chart.js CDN failed, charts degrade gracefully
-        // but text outputs (verdict, tables, metrics) still render.
-        if (typeof Chart !== 'undefined') {
-            try {
-                initCharts({
-                    tco: tcoData, monthly: monthlyData,
-                    cumulative: { months: cumulativeMonths, leaseCash: cumulativeLeaseCash, leaseFull: cumulativeLeaseFull, buyCosts: cumulativeRentCosts },
-                    rentProjection: { months: rentMonths, monthlyRent: rentMonthlyRent, leaseConstant: leaseConstantRent, cumulativeSavings, crossoverMonth },
-                    sensitivityHeatmap: sensitivityHeatmapData,
-                    amortization: { months: amortMonths, principal: amortPrincipal, interest: amortInterest, balance: amortBalance }
-                });
-            } catch(chartErr) { console.warn('Chart rendering failed:', chartErr); }
-        }
+        initCharts({
+            tco: tcoData, monthly: monthlyData,
+            cumulative: { months: cumulativeMonths, leaseCash: cumulativeLeaseCash, leaseFull: cumulativeLeaseFull, buyCosts: cumulativeRentCosts },
+            rentProjection: { months: rentMonths, monthlyRent: rentMonthlyRent, leaseConstant: leaseConstantRent, cumulativeSavings, crossoverMonth },
+            sensitivityHeatmap: sensitivityHeatmapData,
+            amortization: { months: amortMonths, principal: amortPrincipal, interest: amortInterest, balance: amortBalance }
+        });
 
         updateComparisonTable(EMI, MAINTENANCE, monthlyLeaseCost, monthlyRentCost, monthlySavings, termSavings, LEASE_TENURE);
         lastCalculationState = { monthlyLeaseCost, monthlyRentCost, LEASE_TENURE };
@@ -3645,17 +3526,8 @@ function updateConfidenceCard(params) {
 }
 
 /* ================= INIT ================= */
-// Defer initial calculate() to window.onload so Chart.js CDN scripts are
-// guaranteed to have loaded before we try to register plugins and draw charts.
-function _init() {
-    loadFromURL();
-    calculate();
-}
-if (document.readyState === 'complete') {
-    _init();
-} else {
-    window.addEventListener('load', _init);
-}
+loadFromURL();
+calculate();
 
 /* ================= EXIT LIKELIHOOD (FLEXIBILITY) ================= */
 let currentExitLikelihood = 'low';
@@ -3666,8 +3538,7 @@ function setExitLikelihood(level) {
     const flexi = vals[level];
     $('flexibilityPremium').value = flexi;
     $('flexibilityPremiumRange').value = flexi;
-    // flexibilityPremiumLabel removed from UI — exit likelihood is a qualitative choice,
-    // showing the internal ₹/mo conversion to the user is confusing and unnecessary.
+    $('flexibilityPremiumLabel').textContent = flexi === 0 ? '₹0/mo' : formatINR(flexi) + '/mo';
     ['Low','Med','High'].forEach(l => {
         const btn = $('exitBtn' + l);
         if (btn) btn.className = 'exit-btn' + (l.toLowerCase() === level ? ' active-' + level : '');
@@ -3940,14 +3811,6 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeHelpModal();
 });
 
-/* ================= SLIDER ARIA SYNC ================= */
-// Keeps aria-valuenow in sync with the actual slider value for screen readers.
-function updateAllSliderAria() {
-    document.querySelectorAll('input[type="range"]').forEach(range => {
-        range.setAttribute('aria-valuenow', range.value);
-    });
-}
-
 /* ================= UPDATE DIRECTION INDICATORS ================= */
 function updateDirectionIndicators(savings) {
     const dirs = [
@@ -4022,6 +3885,18 @@ bindNewSliders();
     if (el) observer.observe(el);
   });
 })();
+
+// Theme toggle fix: also update nav button text
+const _origToggleTheme = typeof toggleTheme === 'function' ? toggleTheme : null;
+function toggleTheme() {
+  if (_origToggleTheme) _origToggleTheme();
+  // sync nav button
+  const isLight = document.body.classList.contains('light');
+  const icon = document.getElementById('theme-icon');
+  const text = document.getElementById('theme-text');
+  if (icon) icon.textContent = isLight ? '☾' : '☀';
+  if (text) text.textContent = isLight ? 'Light mode' : 'Dark mode';
+}
 
 // Animate hero stat on scroll into view
 (function() {
