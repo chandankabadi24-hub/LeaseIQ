@@ -568,150 +568,14 @@
       height: 1px; background: rgba(230,165,20,0.08);
     }
 
-    /* ═══════════════════════════════════
-       HAMBURGER BUTTON
-    ═══════════════════════════════════ */
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
-      width: 40px; height: 40px;
-      background: transparent;
-      border: 1px solid rgba(230,165,20,0.25);
-      border-radius: 8px;
-      cursor: pointer;
-      padding: 8px 6px;
-      transition: all 0.2s ease;
-    }
-    .nav-hamburger:hover { border-color: var(--site-gold); background: rgba(230,165,20,0.08); }
-    .nav-hamburger span {
-      display: block;
-      width: 18px; height: 2px;
-      background: #EDE8DE;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* ═══════════════════════════════════
-       MOBILE MENU
-    ═══════════════════════════════════ */
-    .mobile-menu-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(2,8,16,0.6);
-      backdrop-filter: blur(4px);
-      z-index: 999;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .mobile-menu-overlay.open { opacity: 1; }
-    .mobile-menu {
-      position: fixed; top: 0; right: -100%;
-      width: min(320px, 85vw); height: 100dvh;
-      background: #08162A;
-      border-left: 1px solid rgba(230,165,20,0.15);
-      z-index: 1001;
-      padding: 0;
-      transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
-      display: flex; flex-direction: column;
-      overflow-y: auto;
-    }
-    .mobile-menu.open { right: 0; }
-    .mobile-menu-header {
-      display: flex; align-items: center; gap: 10px;
-      padding: 20px 24px;
-      border-bottom: 1px solid rgba(230,165,20,0.1);
-    }
-    .mobile-menu-close {
-      margin-left: auto;
-      background: transparent; border: 1px solid rgba(230,165,20,0.2);
-      color: #EDE8DE; border-radius: 8px;
-      width: 34px; height: 34px;
-      cursor: pointer; font-size: 14px;
-      transition: all 0.2s ease;
-    }
-    .mobile-menu-close:hover { background: rgba(230,165,20,0.1); border-color: var(--site-gold); }
-    .mobile-menu-links {
-      list-style: none;
-      padding: 16px 0;
-      flex: 1;
-    }
-    .mobile-menu-links li a {
-      display: block;
-      padding: 16px 24px;
-      font-size: 16px; font-weight: 700;
-      color: var(--site-subtext); text-decoration: none;
-      letter-spacing: 0.02em; text-transform: uppercase;
-      font-size: 13px;
-      border-left: 3px solid transparent;
-      transition: all 0.2s ease;
-    }
-    .mobile-menu-links li a:hover {
-      color: var(--site-gold);
-      border-left-color: var(--site-gold);
-      background: rgba(230,165,20,0.04);
-    }
-    .mobile-menu-actions {
-      padding: 20px 24px;
-      border-top: 1px solid rgba(230,165,20,0.1);
-      display: flex; flex-direction: column; gap: 10px;
-    }
-
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      /* Nav */
-      .nav-hamburger { display: flex; }
-      .nav-btn-primary { display: none; }
-      .mobile-menu-overlay { display: block; }
-
-      /* Hero */
-      #site-hero { padding: 88px 20px 60px; }
-      .hero-headline { font-size: clamp(38px, 10vw, 56px); margin-bottom: 20px; }
-      .hero-sub { font-size: 15px; margin-bottom: 36px; }
-
-      /* Hero CTAs — stack on very small screens */
-      .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; margin-bottom: 48px; }
-      .hero-cta-primary, .hero-cta-secondary {
-        justify-content: center;
-        padding: 14px 24px; font-size: 15px;
-      }
-
-      /* Hero stats — 2×2 grid instead of vertical stack */
-      .hero-stats {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr;
-        gap: 0;
-      }
-      .hero-stat {
-        border-right: 1px solid rgba(230,165,20,0.1) !important;
-        border-bottom: 1px solid rgba(230,165,20,0.1) !important;
-        padding: 18px 16px;
-      }
-      .hero-stats .hero-stat:nth-child(2n) { border-right: none !important; }
-      .hero-stats .hero-stat:nth-child(3),
-      .hero-stats .hero-stat:nth-child(4) { border-bottom: none !important; }
-      .hero-stat-value { font-size: clamp(20px, 5vw, 26px); }
-
-      /* Why & How sections */
-      #site-why > div, #site-how { padding: 60px 20px; }
-      .section-title { font-size: clamp(28px, 7vw, 40px); }
-
-      /* Footer */
-      #site-footer { padding: 40px 20px 28px; }
-    }
-
-    @media (max-width: 480px) {
-      /* Even tighter on small phones */
-      #site-hero { padding: 80px 16px 48px; }
-      .hero-badge { font-size: 10px; padding: 5px 12px; }
-      .hero-stat-value { font-size: 20px; }
-      .hero-stat-label { font-size: 10px; }
-      .hero-stat { padding: 14px 12px; }
+      #site-hero { padding: 100px 24px 60px; }
+      .hero-stats { flex-direction: column; }
+      .hero-stat { border-right: none; border-bottom: 1px solid rgba(230,165,20,0.1); }
+      .hero-stat:last-child { border-bottom: none; }
+      #site-why, #site-how { padding: 60px 24px; }
+      #site-footer { padding: 40px 24px 30px; }
     }
     </style>
 
@@ -1575,8 +1439,8 @@
         .metric-card.payback-card .metric-value { color: var(--amber); }
 
         @media (max-width: 768px) {
-            body { padding: 0; }
-            .container { gap: 14px; display: flex; flex-direction: column; padding: 12px 16px 40px !important; }
+            body { padding: 12px; }
+            .container { gap: 14px; display: flex; flex-direction: column; }
             #verdictCard { order: 1; } #inputCard { order: 2; } #gaugeCard { order: 3; } #confidenceCard { order: 4; } #chartsSection { order: 5; } #tableCard { order: 6; }
             #inputsGrid { grid-template-columns: 1fr !important; gap: 16px !important; }
             .card, .chartCard { padding: 16px; }
@@ -1587,23 +1451,6 @@
             .charts-grid { grid-template-columns: 1fr; gap: 14px; }
             .metricsBox { grid-template-columns: repeat(3, 1fr); gap: 10px; }
             .summary-panel { grid-template-columns: repeat(2, 1fr); }
-            /* Tool utility bar on mobile */
-            #toolUtilBar { padding: 0 16px 10px !important; justify-content: flex-start !important; }
-            .share-btn, .global-help-btn { font-size: 12px; padding: 7px 12px; }
-            /* Presets bar on mobile */
-            .presets-bar { gap: 6px; padding: 10px 12px; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
-            .presets-bar::-webkit-scrollbar { display: none; }
-            .presets-label { flex-shrink: 0; }
-            .preset-btn { flex-shrink: 0; font-size: 11px; padding: 5px 10px; }
-            /* Scenario grid — 2 cols on mobile */
-            .scenario-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            /* Verdict stats wrap */
-            .verdict-stats { gap: 16px; }
-            .verdict-headline { font-size: 18px; }
-            /* Breakeven grid */
-            .breakeven-grid { grid-template-columns: 1fr 1fr; }
-            /* Section toggle better tap targets */
-            .section-toggle { padding: 4px 0; }
         }
 
         /* =====================================================
@@ -1716,34 +1563,8 @@
     <button class="nav-btn-primary" onclick="document.getElementById('tool-section').scrollIntoView({behavior:'smooth'})">
       Analyse Now →
     </button>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" onclick="toggleMobileMenu()">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </nav>
-
-<!-- Mobile menu overlay -->
-<div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
-<div class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
-  <div class="mobile-menu-header">
-    <div class="nav-logo-mark">L</div>
-    <span style="font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:#EDE8DE;">Lease<span style="color:#E6A514">IQ</span></span>
-    <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu">✕</button>
-  </div>
-  <ul class="mobile-menu-links">
-    <li><a href="#site-why" onclick="toggleMobileMenu()">Why LeaseIQ</a></li>
-    <li><a href="#tool-section" onclick="toggleMobileMenu()">The Tool</a></li>
-    <li><a href="#site-how" onclick="toggleMobileMenu()">How It Works</a></li>
-  </ul>
-  <div class="mobile-menu-actions">
-    <button class="nav-btn-ghost" style="width:100%;justify-content:center;display:flex;" onclick="toggleTheme();toggleMobileMenu()">
-      <span id="theme-icon-mobile">☾</span> &nbsp;Toggle Theme
-    </button>
-    <button class="nav-btn-primary" style="width:100%;justify-content:center;display:flex;" onclick="document.getElementById('tool-section').scrollIntoView({behavior:'smooth'});toggleMobileMenu()">
-      Analyse Now →
-    </button>
-  </div>
-</div>
 
 <!-- ═══════════ HERO ═══════════ -->
 <section id="site-hero" aria-label="Hero">
@@ -1850,7 +1671,7 @@
   </div>
 
   <!-- Tool utility bar (replaces old header) -->
-  <div style="max-width:1600px;margin:0 auto;padding:0 32px 12px;display:flex;align-items:center;justify-content:flex-end;gap:10px;position:relative;z-index:2;flex-wrap:wrap;" id="toolUtilBar">
+  <div style="max-width:1600px;margin:0 auto;padding:0 32px 12px;display:flex;align-items:center;justify-content:flex-end;gap:10px;position:relative;z-index:2;">
     <button class="share-btn" onclick="shareScenario()" aria-label="Share this scenario">📤 Share</button>
     <button class="share-btn" onclick="resetDefaults()" aria-label="Reset inputs" style="background:rgba(255,92,92,0.1);color:var(--red);border-color:rgba(255,92,92,0.3);">↺ Reset</button>
     <button class="global-help-btn" onclick="showGlobalHelp()" aria-label="Help">ℹ Help <span class="kbd-hint">?</span></button>
@@ -2474,8 +2295,6 @@ function updateThemeUI() {
     const isDark = !document.body.classList.contains('light');
     document.getElementById('theme-icon').textContent = isDark ? '🌙' : '☀️';
     document.getElementById('theme-text').textContent = isDark ? 'Dark' : 'Light';
-    const mobileIcon = document.getElementById('theme-icon-mobile');
-    if (mobileIcon) mobileIcon.textContent = isDark ? '🌙' : '☀️';
 }
 
 if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light'); updateThemeUI(); }
@@ -4170,25 +3989,6 @@ function bindNewSliders() {
     });
 }
 bindNewSliders();
-
-/* ================= MOBILE MENU ================= */
-function toggleMobileMenu() {
-    const menu = document.getElementById('mobileMenu');
-    const overlay = document.getElementById('mobileMenuOverlay');
-    const hamburger = document.getElementById('navHamburger');
-    const isOpen = menu.classList.contains('open');
-    if (isOpen) {
-        menu.classList.remove('open');
-        overlay.classList.remove('open');
-        hamburger.classList.remove('open');
-        document.body.style.overflow = '';
-    } else {
-        menu.classList.add('open');
-        overlay.classList.add('open');
-        hamburger.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-}
 
 /* ================= LEASEIQ SITE JS ================= */
 
